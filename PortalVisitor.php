@@ -1,11 +1,15 @@
-<!DOCTYPE html>
+<?php
+session_start();
+require_once("auth.php");
+authVisit("Visitor");
+?>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Markham Hospital </title>
+    <title>Markham Hospital </title>
 
 </head>
 
@@ -43,28 +47,19 @@
             <input class="searchbar" type="search" placeholder="Search" aria-label="Search">
             <button class="btn" type="submit"> Search</button>
 			<br>
-            <a href="login.php">Login/Signup</a>
+            <a href="portal.php"><?php echo "Greetings, ".$_SESSION['name'] ?></a>
         </div>
 
     </header>
 
-    <!--  Welcome to AAC - content  -->
 	<div class="content">
-    <div class="content1">
-        <h1>Welcome to Markham Hospital</h1>
-        <p>Markham Hospital (MH) is a 501(c)(3) non-profit community health center with locations in Jamshedpur, Mumbai and Visakhapatnam.
-		Our professional staff includes board certified Pediatricians, Family Practice, Internal Medicine, OB/GYN, Cardiologists, Surgeons, 
-		Dentists Board Certified Psychiatrist, Psychologists, Licensed Clinical Social Worker and Licensed Marriage and Family
-		Therapist. 
-In addition, our health centers feature state-of-the-art equipment and a paperless electronic health record system..</p>
-        <img src="img/img21.jpg">
-    </div>
-    
-    <div class="content2">
-        <h2></h2>
-        <p></p>
-       
-    </div>
+    <h1>Welcome to Visitor Portal</h1>
+	<div class="options">
+	<a href="OnlineAppointment.php">Create Appointment</a><br>
+	<a href="AppointmentStatusChecker.php">Check Appointment Status/Cancel Appointment</a>
+	</div>
+	<br>
+	<a href="logout.php">Log out</a>
 	</div>
 </body>
 

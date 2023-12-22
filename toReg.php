@@ -1,18 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+session_start();
+$conn=mysqli_connect("localhost","root","","entry1");
 
+$ticid = $_POST["tid"];
+$intime = $_POST["time"];
+//echo $ticid;
+
+$sql = "update appointment set inTime='$intime',status='Ongoing' where ticId='$ticid'";
+if(mysqli_query($conn,$sql))
+	{
+
+		$msg = "Your Visit (Ticket id:<b>'$ticid'</b>) has been recorded<br>";
+		$msg.= "<a href='portal.php'>Go back</a><br>";
+	}
+	
+	else
+	{
+		$msg = "An error has occured.<br>";
+		$msg.=mysqli_error($conn);
+	}
+?>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Markham Hospital </title>
-
+<link rel="stylesheet" href="css/style.css" />
+<style>
+<?php include "css/reg.css" ?>
+</style>
 </head>
-
-<link rel="stylesheet" href="css/style.css">
-
-
-<body ontouchstart>
+<body>
     <header class="header">
 
         <!-- left box for logo in navbar -->
@@ -43,29 +58,15 @@
             <input class="searchbar" type="search" placeholder="Search" aria-label="Search">
             <button class="btn" type="submit"> Search</button>
 			<br>
-            <a href="login.php">Login/Signup</a>
+            <a href="portal.php"><?php echo "Greetings, ".$_SESSION['name'] ?></a>
         </div>
 
     </header>
-
-    <!--  Welcome to AAC - content  -->
+	
 	<div class="content">
-    <div class="content1">
-        <h1>Welcome to Markham Hospital</h1>
-        <p>Markham Hospital (MH) is a 501(c)(3) non-profit community health center with locations in Jamshedpur, Mumbai and Visakhapatnam.
-		Our professional staff includes board certified Pediatricians, Family Practice, Internal Medicine, OB/GYN, Cardiologists, Surgeons, 
-		Dentists Board Certified Psychiatrist, Psychologists, Licensed Clinical Social Worker and Licensed Marriage and Family
-		Therapist. 
-In addition, our health centers feature state-of-the-art equipment and a paperless electronic health record system..</p>
-        <img src="img/img21.jpg">
-    </div>
-    
-    <div class="content2">
-        <h2></h2>
-        <p></p>
-       
-    </div>
+	<div class="msg">
+	<?php echo $msg?>
+	</div>
 	</div>
 </body>
-
 </html>
